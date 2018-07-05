@@ -1,8 +1,7 @@
 import ply.lex as lex
-import ply.yacc
 
 tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR',
-        'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
+        'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
         'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND']
 t_ignore = ' \t'
 t_MAS=r'\+'
@@ -28,6 +27,8 @@ t_ELSE = r'else'
 t_WHILE = r'\while'
 t_PARENTH_IZQ = r'\('
 t_PARENTH_DER = r'\)'
+t_LLAVE_IZQ = r'\{'
+t_LLAVE_DER = r'\}'
 t_DO = r'do'
 t_FOR = r'for'
 t_FOREACH = r'foreach'
