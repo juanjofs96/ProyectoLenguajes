@@ -2,7 +2,8 @@ import ply.lex as lex
 
 tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR', 'MENOR',
         'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
-        'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND', 'NUMBER']
+        'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND',
+        'NUMBER', 'COMA', 'STRING', 'TYPE']
 t_ignore = ' \t'
 t_MAS=r'\+'
 t_MENOS=r'-'
@@ -17,7 +18,7 @@ t_NEGADO=r'/~'
 t_IGUAL=r'='
 t_IDENTICO=r'=='
 t_DIFERENTE=r'!='
-
+t_COMA = r','
 t_MAYOR=r'>'
 t_MENOR=r'<'
 
@@ -42,7 +43,7 @@ t_INCLUDE = r'include'
 t_GOTO = r'goto'
 t_OR = r'or'
 t_AND = r'and'
-
+t_STRING = r'String'
 
 reserved = {
     'if': 'IF',
@@ -74,12 +75,12 @@ def t_error(t):
 
 lex.lex()
 
-lex.input("$var")
+"""lex.input("if,")
 while True:
     tok = lex.token()
     if not tok:
         t_error(tok)
         break
     print(tok)
-
+"""
 
