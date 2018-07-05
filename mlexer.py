@@ -1,8 +1,8 @@
 import ply.lex as lex
 
-tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR',
+tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR', 'MENOR',
         'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
-        'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND']
+        'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND', 'NUMBER']
 t_ignore = ' \t'
 t_MAS=r'\+'
 t_MENOS=r'-'
@@ -62,17 +62,24 @@ def t_VAR(p):
     return p
 
 
+def t_NUMBER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
+
+
 def t_error(t):
     print(t)
 
+
 lex.lex()
 
-lex.input("if+*else ifelse $_animal")
+lex.input("$var")
 while True:
     tok = lex.token()
     if not tok:
         t_error(tok)
         break
-    print(tok.value)
+    print(tok)
 
 
