@@ -1,8 +1,8 @@
 import ply.lex as lex
 
 tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR', 'MENOR',
-        'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
-        'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND',
+        'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
+        'CONTINUE', 'REQUIRE', 'GOTO','VAR','OR','AND',
         'NUMBER', 'COMA', 'TIPO', 'LAMBDA','FIN', 'INT', 'STRING', 'DOUBLE', 'FLOAT']
 
 t_ignore = ' \t'
@@ -19,16 +19,9 @@ t_NEGADO=r'/~'
 t_IGUAL=r'='
 t_IDENTICO=r'=='
 t_DIFERENTE=r'!='
-
 t_COMA = r','
-
 t_MAYOR=r'>'
 t_MENOR=r'<'
-
-t_IF = r'if'
-t_ELSEIF = r'else\sif'
-t_ELSE = r'else'
-t_WHILE = r'\while'
 t_PARENTH_IZQ = r'\('
 t_PARENTH_DER = r'\)'
 t_LLAVE_IZQ = r'\{'
@@ -38,11 +31,6 @@ t_FOR = r'for'
 t_FOREACH = r'foreach'
 t_BREAK = r'break'
 t_CONTINUE = r'continue'
-t_SWITCH = r'switch'
-t_CASE = r'case'
-t_DECLARE = r'declare'
-t_RETURN = r'return'
-t_INCLUDE = r'include'
 t_GOTO = r'goto'
 t_OR = r'or'
 t_AND = r'and'
@@ -54,10 +42,6 @@ reserved = {
     'then':'THEN',
     'while':'WHILE',
     'else if': 'ELSEIF',
-    'include' : 'INCLUDE',
-    'return': 'RETURN',
-    'case': 'CASE',
-    'switch': 'SWITCH',
     'int': 'INT',
     'String': 'STRING',
     'double': 'DOUBLE',

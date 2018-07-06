@@ -4,15 +4,11 @@ import ply.yacc as yacc
 
 tokens = mlexer.tokens
 
-precedence = (
-    ('left', 'MAS', 'MENOS'),
-    ('left', 'POR', 'DIVIDE'),
-)
-
+##PROYECTO LENGUAJES, DEFINICION DE EXPRESIONES LAMBDA JAVA 8##
 
 
 def p_expr_general(p):
-    '''expr_general : INT VAR IGUAL expresion_lambda
+    '''expr_general : type VAR IGUAL expresion_lambda
     | VAR IGUAL expresion_lambda
     | expresion_lambda'''
 
@@ -23,15 +19,15 @@ def p_expresion_lamda(p):
 
 
 def p_expresion_interna(p):
-    '''expresion_interna : INT VAR COMA expresion_interna
-    | INT VAR
+    '''expresion_interna : type VAR COMA expresion_interna
+    | type VAR
     | VAR'''
 
 
 def p_expresion(p):
     '''expresion : expresion MAS termino
     | expresion MENOS termino
-    | termino'''
+    | termino '''
 
 
 def p_termino(p):
@@ -46,10 +42,12 @@ def p_factor(p):
     | PARENTH_IZQ expresion PARENTH_DER'''
 
 
-"""def p_expresion_uminus(p):
-    'expresion_uminus : MENOS expresion %prec UMINUS'
-    p[0] = -p[2]
-"""
+def p_type(p):
+    '''type : STRING
+    | INT
+    | FLOAT
+    | DOUBLE'''
+
 
 def p_factor_variable(p):
     '''factor_variable : VAR'''
@@ -58,13 +56,6 @@ def p_factor_variable(p):
     else:
         print("Undefined Variable", p[1], "in line no.", p.lineno(1))
 
-
-def p_factor_expr(p):
-    '''factor_expr : PARENTH_IZQ expresion PARENTH_DER'''
-    p[0] = p[2]
-
-
-##PROYECTO LENGUAJES, DEFINICION DE EXPRESIONES LAMBDA JAVA 8##
 
 def p_empty(p):
     '''empty : '''
