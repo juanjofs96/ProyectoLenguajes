@@ -1,8 +1,8 @@
 import ply.lex as lex
 
 tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR',
-        'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
-        'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND']
+        'MENOR', 'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
+        'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND','TIPO']
 t_ignore = ' \t'
 t_MAS=r'\+'
 t_MENOS=r'-'
@@ -18,6 +18,7 @@ t_IGUAL=r'='
 t_IDENTICO=r'=='
 t_DIFERENTE=r'!='
 
+t_TIPO=r'String|int|boolean|double|float|char|short|long'
 t_MAYOR=r'>'
 t_MENOR=r'<'
 
@@ -55,6 +56,9 @@ reserved = {
     'switch': 'SWITCH'
 }
 
+#def t_TIPO(tipo):
+ #   r'("String"|"int"|"boolean"|"double"|"float"|"long"|"short"|"char")'
+#    return tipo
 
 def t_VAR(p):
     r'\$[^0-9]+[A-Za-z_0-9]+'
@@ -67,7 +71,7 @@ def t_error(t):
 
 lex.lex()
 
-lex.input("if+*else ifelse $_animal")
+lex.input("intdouble")
 while True:
     tok = lex.token()
     if not tok:
