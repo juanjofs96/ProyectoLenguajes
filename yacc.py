@@ -144,8 +144,8 @@ def p_expresion_interna(p):
     | VAR'''
 
 def p_expresion_lamda(p):
-    '''expresion_lambda : expresion_interna IGUAL expresion_lambda
-    | PARENTH_IZQ expresion interna PARENTH_DER LAMBDA expresion FIN'''
+    '''expresion_lambda : asignar IGUAL expresion_lambda
+    | PARENTH_IZQ expresion_interna PARENTH_DER LAMBDA expresion FIN'''
 
 
 parser = yacc.yacc(debug = False, write_tables = False)
