@@ -1,8 +1,10 @@
 import ply.lex as lex
 
-tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR',
-        'MENOR', 'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
-        'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND','TIPO']
+tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR', 'MENOR',
+        'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
+        'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND',
+        'NUMBER', 'COMA', 'STRING', 'TIPO']
+
 t_ignore = ' \t'
 t_MAS=r'\+'
 t_MENOS=r'-'
@@ -19,6 +21,8 @@ t_IDENTICO=r'=='
 t_DIFERENTE=r'!='
 
 t_TIPO=r'String|int|boolean|double|float|char|short|long'
+t_COMA = r','
+
 t_MAYOR=r'>'
 t_MENOR=r'<'
 
@@ -43,7 +47,7 @@ t_INCLUDE = r'include'
 t_GOTO = r'goto'
 t_OR = r'or'
 t_AND = r'and'
-
+t_STRING = r'String'
 
 reserved = {
     'if': 'IF',
@@ -66,17 +70,25 @@ def t_VAR(p):
     return p
 
 
+def t_NUMBER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
+
+
 def t_error(t):
     print(t)
 
+
 lex.lex()
 
-lex.input("intdouble")
+lex.input("int")
+
 while True:
     tok = lex.token()
     if not tok:
         t_error(tok)
         break
-    print(tok.value)
+    print(tok)
 
 
