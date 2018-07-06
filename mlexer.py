@@ -3,7 +3,7 @@ import ply.lex as lex
 tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR', 'MENOR',
         'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
         'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND',
-        'NUMBER', 'COMA', 'STRING', 'TIPO', 'LAMBDA','FIN']
+        'NUMBER', 'COMA', 'TIPO', 'LAMBDA','FIN', 'INT', 'STRING', 'DOUBLE', 'FLOAT']
 
 t_ignore = ' \t'
 t_MAS=r'\+'
@@ -20,7 +20,6 @@ t_IGUAL=r'='
 t_IDENTICO=r'=='
 t_DIFERENTE=r'!='
 
-t_TIPO=r'String|int|boolean|double|float|char|short|long'
 t_COMA = r','
 
 t_MAYOR=r'>'
@@ -47,7 +46,6 @@ t_INCLUDE = r'include'
 t_GOTO = r'goto'
 t_OR = r'or'
 t_AND = r'and'
-t_STRING = r'String'
 t_LAMBDA = r'\->'
 t_FIN =  r';'
 
@@ -59,15 +57,16 @@ reserved = {
     'include' : 'INCLUDE',
     'return': 'RETURN',
     'case': 'CASE',
-    'switch': 'SWITCH'
+    'switch': 'SWITCH',
+    'int': 'INT',
+    'String': 'STRING',
+    'double': 'DOUBLE',
+    'float': 'FLOAT'
 }
 
-#def t_TIPO(tipo):
- #   r'("String"|"int"|"boolean"|"double"|"float"|"long"|"short"|"char")'
-#    return tipo
 
 def t_VAR(p):
-    r'\w[A-Za-z_0-9]+'
+    r'\w+'
     p.type = reserved.get(p.value, 'VAR')
     return p
 
@@ -78,13 +77,37 @@ def t_NUMBER(t):
     return t
 
 
+def t_INT(t):
+    r'int'
+    t.value = t.value
+    return t
+
+
+def t_STRING(t):
+    r'String'
+    t.value = t.value
+    return t
+
+
+def t_FLOAT(t):
+    r'float'
+    t.value = t.value
+    return t
+
+
+def t_DOUBLE(t):
+    r'double'
+    t.value = t.value
+    return t
+
+
 def t_error(t):
     print(t)
 
 
 lex.lex()
 
-lex.input("(String hola) -> 2 + 1")
+lex.input("int resultado = (int valor1, int valor2) -> valor1+valor2;")
 
 while True:
     tok = lex.token()

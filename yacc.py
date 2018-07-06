@@ -12,7 +12,7 @@ precedence = (
 
 
 def p_expr_general(p):
-    '''expr_general : TIPO VAR IGUAL expresion_lambda
+    '''expr_general : INT VAR IGUAL expresion_lambda
     | VAR IGUAL expresion_lambda
     | expresion_lambda'''
 
@@ -23,8 +23,8 @@ def p_expresion_lamda(p):
 
 
 def p_expresion_interna(p):
-    '''expresion_interna : TIPO VAR COMA expresion_interna
-    | TIPO VAR
+    '''expresion_interna : INT VAR COMA expresion_interna
+    | INT VAR
     | VAR'''
 
 
