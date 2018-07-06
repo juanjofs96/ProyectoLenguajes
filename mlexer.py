@@ -75,12 +75,12 @@ def t_error(t):
 
 lex.lex()
 
-"""lex.input("if,")
+lex.input("2+2")
 while True:
     tok = lex.token()
     if not tok:
         t_error(tok)
         break
     print(tok)
-"""
+
 

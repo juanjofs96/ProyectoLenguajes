@@ -11,15 +11,16 @@ precedence = (
 )
 
 def p_expresion(p):
-    '''expresion : expresion_suma
-    | expresion_resta
-    | termino'''
+    '''expresion : termino
+    | expresion MAS termino
+    | expresion MENOS termino'''
+
 
 
 def p_termino(p):
-    '''termino : termino_mul
-    | termino_div
-    | factor'''
+    '''termino : factor
+    | termino POR factor
+    | termino DIVIDE factor'''
 
 
 def p_factor(p):
@@ -33,23 +34,23 @@ def p_asignar(p):
     vars[p[1]] = p[3]
 
 
-def p_expresion_suma(p):
-    '''expresion_suma : expresion MAS termino'''
+def p_expr_suma(p):
+    '''expr_suma : expresion MAS termino'''
     p[0] = p[1] + p[3]
 
 
-def p_expresion_resta(p):
-    '''expresion_resta : expresion MENOS termino'''
+def p_expr_resta(p):
+    '''expr_resta : expresion MENOS termino'''
     p[0] = p[1] - p[3]
 
 
-def p_termino_mult(p):
-    '''termino_mul : termino POR factor'''
+def p_term_mult(p):
+    '''term_mul : termino POR factor'''
     p[0] = p[1] * p[3]
 
 
-def p_termino_div(p):
-    '''termino_div : termino DIVIDE  factor'''
+def p_term_div(p):
+    '''term_div : termino DIVIDE  factor'''
     p[0] = p[1] / p[2]
 
 
@@ -130,6 +131,10 @@ def p_empty(p):
     p[0] = None
 
 
+def p_error(p):
+    print(p)
+
+
 #PRIMER VAR DEBERIA SER UN TIPO
 def p_expresion_interna(p):
     '''expresion_interna : VAR VAR COMA expresion_interna
@@ -140,8 +145,9 @@ def p_expresion_interna(p):
 parser = yacc.yacc(debug = False, write_tables = False)
 
 while True:
-    s = input('Hola')
-    parser.parse()
-
-
-
+    try:
+        s = input("Input")
+    except EOFError:
+        break
+    parser.parse(s)
+    print("Cool")
