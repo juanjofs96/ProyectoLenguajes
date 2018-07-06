@@ -3,7 +3,7 @@ import ply.lex as lex
 tokens=['IDENTIDAD','MAS','MENOS','DIVIDE','POR','MODULO','POTENCIA','Y','OINCL','OEXCL','NEGADO','IGUAL','IDENTICO','DIFERENTE','MAYOR', 'MENOR',
         'IF', 'ELSE', 'ELSEIF', 'WHILE', 'PARENTH_IZQ', 'PARENTH_DER', 'LLAVE_IZQ','LLAVE_DER', 'DO', 'FOR', 'FOREACH', 'BREAK',
         'CONTINUE', 'SWITCH', 'CASE', 'DECLARE', 'RETURN', 'REQUIRE', 'INCLUDE', 'GOTO','VAR','OR','AND',
-        'NUMBER', 'COMA', 'STRING', 'TIPO']
+        'NUMBER', 'COMA', 'STRING', 'TIPO', 'LAMBDA','FIN']
 
 t_ignore = ' \t'
 t_MAS=r'\+'
@@ -48,6 +48,8 @@ t_GOTO = r'goto'
 t_OR = r'or'
 t_AND = r'and'
 t_STRING = r'String'
+t_LAMBDA = r'\->'
+t_FIN =  r';'
 
 reserved = {
     'if': 'IF',
@@ -82,7 +84,7 @@ def t_error(t):
 
 lex.lex()
 
-lex.input("int")
+lex.input(";")
 
 while True:
     tok = lex.token()

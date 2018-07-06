@@ -36,6 +36,7 @@ def p_asignar(p):
 
 def p_expr_suma(p):
     '''expr_suma : expresion MAS termino'''
+
     p[0] = p[1] + p[3]
 
 
@@ -51,6 +52,7 @@ def p_term_mult(p):
 
 def p_term_div(p):
     '''term_div : termino DIVIDE  factor'''
+
     p[0] = p[1] / p[2]
 
 
@@ -137,16 +139,20 @@ def p_error(p):
 
 #PRIMER VAR DEBERIA SER UN TIPO
 def p_expresion_interna(p):
-    '''expresion_interna : VAR VAR COMA expresion_interna
-    | VAR VAR
+    '''expresion_interna : TIPO VAR COMA expresion_interna
+    | TIPO VAR
     | VAR'''
+
+def p_expresion_lamda(p):
+    '''expresion_lambda : expresion_interna IGUAL expresion_lambda
+    | PARENTH_IZQ expresion interna PARENTH_DER LAMBDA expresion FIN'''
 
 
 parser = yacc.yacc(debug = False, write_tables = False)
 
 while True:
     try:
-        s = input("Input")
+        s = input("int a = (int b, int c) -> b + c;")
     except EOFError:
         break
     parser.parse(s)
