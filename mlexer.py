@@ -67,7 +67,7 @@ reserved = {
 #    return tipo
 
 def t_VAR(p):
-    r'\$[^0-9]+[A-Za-z_0-9]+'
+    r'\w[A-Za-z_0-9]+'
     p.type = reserved.get(p.value, 'VAR')
     return p
 
@@ -84,7 +84,7 @@ def t_error(t):
 
 lex.lex()
 
-lex.input(";")
+lex.input("(String hola) -> 2 + 1")
 
 while True:
     tok = lex.token()
